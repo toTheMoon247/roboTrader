@@ -1,6 +1,6 @@
 # Release Notes
 
-## Version 0.1.0 (17 March 2023)
+## Version 0.2.0 (17 March 2023)
 
 - Added support for the MockAPI
 - Implemented automated trading based on specific conditions
