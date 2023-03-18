@@ -7,4 +7,4 @@ if __name__ == '__main__':
     api_secret = "your-api-secret"
     mock_api = MockAPI(api_endpoint, api_key, api_secret)
     trader = Trader(mock_api)
-    trader.trade()
+    trader.run()
