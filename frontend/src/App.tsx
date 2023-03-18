@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Message from './Message';
 import RunButton from './Components/RunButton';
 
+
 function App() {
+  const [backendStatus, setBackendStatus] = useState("Backend off");
+
+  const handleBackendStatusUpdate = (status: string) => {
+    setBackendStatus(status);
+  };
+
   return (
     <div>
-      <Message text="Hello from Vite" />
-      <RunButton />
+      <Message text={backendStatus} />
+      <RunButton onUpdateStatus={handleBackendStatusUpdate} />
     </div>
   );
 }
