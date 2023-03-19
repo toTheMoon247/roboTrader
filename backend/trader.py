@@ -1,18 +1,34 @@
 import random
 import time
+import threading
 
 class Trader:
     def __init__(self, api):
         self.api = api
         self.symbol = 'AAPL'
         self.target_price = 100
+        self.running = False
 
     def trade(self):
         self.api.authenticate()
         stock_price = self.api.get_apple_stock_price()
         if stock_price >= 100:
             self.api.place_order(side='buy', symbol=self.symbol, quantity=1, price=stock_price)
-            
+
+    def start(self):
+        """
+        Starts the automated trading program.
+        """
+        self.running = True
+        thread = threading.Thread(target=self.run)
+        thread.start()
+
+    def stop(self):
+        """
+        Stops the automated trading program.
+        """
+        self.running = False
+
     def run(self):
         """
         Runs the automated trading program.
@@ -23,8 +39,8 @@ class Trader:
         # Keep track of the previous price
         previous_price = current_price
 
-        # Loop indefinitely
-        while True:
+        # Loop until stopped
+        while self.running:
             # Get the current price
             current_price = self.get_stock_price()
 
@@ -39,7 +55,6 @@ class Trader:
             if current_price >= self.target_price:
                 # Place a buy order for one share of the stock
                 order = self.api.place_order(order_side='buy', symbol=self.symbol, quantity=1, price=current_price)
-
 
                 # Print the order details
                 print(f'Buy order placed: {order}')

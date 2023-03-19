@@ -1,10 +1,22 @@
-from brokerApi import MockAPI
+import threading
+import time
+
 from trader import Trader
+from brokerApi import MockAPI
+
+def start_trading():
+    api = MockAPI('https://paper-api.alpaca.markets', 'api_key', 'api_secret')
+    trader = Trader(api)
+    trader.start()
+
+    # Wait for user input to stop the app
+    while True:
+        user_input = input()
+        if user_input == 'stop':
+            trader.stop()
+            print('Trading app stopped.')
+            break
 
 if __name__ == '__main__':
-    api_endpoint = "http://your-mock-api-endpoint.com/api/"
-    api_key = "your-api-key"
-    api_secret = "your-api-secret"
-    mock_api = MockAPI(api_endpoint, api_key, api_secret)
-    trader = Trader(mock_api)
-    trader.run()
+    print('Starting trading app...')
+    start_trading()

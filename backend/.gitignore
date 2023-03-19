@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+dist/
+build/
+.env
+
+# IDE
+.idea/
+
+# Virtualenv
+env/
+
+# Flask
+instance/
+
+# Logs
+logs/
+
+# Test reports
+.coverage
+htmlcov/
+
+# Other
+.DS_Store
